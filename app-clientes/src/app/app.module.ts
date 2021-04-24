@@ -8,12 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { CabecalhoComponent } from './cabecalho/cabecalho.component';
+import { ClienteListaComponent } from './clientes/cliente-lista/cliente-lista.component'
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteInserirComponent
+    ClienteInserirComponent,
+    CabecalhoComponent,
+    ClienteListaComponent
   ],
   imports: [
     FormsModule,
@@ -21,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button'
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
