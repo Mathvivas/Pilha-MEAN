@@ -2,6 +2,7 @@ import { Cliente } from './../cliente.model';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ClienteService } from '../cliente.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-cliente-inserir',
@@ -10,18 +11,43 @@ import { ClienteService } from '../cliente.service';
 })
 export class ClienteInserirComponent implements OnInit {
 
-  constructor(private clienteService: ClienteService) { }
+  private modo: string = 'criar'
+  private idCliente: string
+  public cliente: Cliente
+
+  constructor(private clienteService: ClienteService, public route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('idCliente')) {
+        this.modo = "editar"
+        this.idCliente = paramMap.get('idCliente')
+        this.cliente = this.clienteService.getCliente(this.idCliente)
+      }
+      else {
+        this.modo = "criar"
+        this.idCliente = null
+      }
+    })
   }
 
-  onAdicionarCliente(form: NgForm) {
+  onSalvarCliente(form: NgForm) {
     if (form.invalid) return;
-    this.clienteService.adicionarCliente(
-      form.value.nome,
-      form.value.fone,
-      form.value.email
-    )
+    if (this.modo === 'criar') {
+      this.clienteService.adicionarCliente(
+        form.value.nome,
+        form.value.fone,
+        form.value.email
+      )
+    }
+    else {
+      this.clienteService.atualizarCliente(
+        this.idCliente,
+        form.value.nome,
+        form.value.fone,
+        form.value.email
+      )
+    }
     form.resetForm()
   }
 

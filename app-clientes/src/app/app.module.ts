@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ClienteService } from './clientes/cliente.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ClienteService } from './clientes/cliente.service';
     ClienteListaComponent
   ],
   imports: [
+    AppRoutingModule,
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
