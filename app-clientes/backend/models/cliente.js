@@ -13,6 +13,10 @@ const clienteSchema = mongoose.Schema({
   email: {
     type: String,
     require: true
+  },
+  imagemURL: {
+    type: String,
+    required: true
   }
 })
 
